@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use crate::models::SleepRecord;
 
@@ -53,3 +53,17 @@ pub fn find_short_sleepers(records: &[SleepRecord]) -> Vec<&SleepRecord> {
 
     short_sleepers
 }
+
+pub fn find_unique_value<F>(records: &[SleepRecord], extractor: F) -> HashSet<String>
+where
+    F: Fn(&SleepRecord) -> String,
+{
+    records.iter().map(extractor).collect()
+}
+
+// pub fn average_sleep_quality_by_occupation(records: &[SleepRecord]) -> HashMap<String, f64> {
+//     let occupations =
+//     let map: HashMap<String, (u64, usize)> = HashMap::new();
+//
+//
+// }

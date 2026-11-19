@@ -8,6 +8,7 @@ use reader::read_csv;
 
 use crate::analysis::count_by_gender;
 use crate::analysis::find_short_sleepers;
+use crate::analysis::find_unique_value;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = "data/Sleep_health_and_lifestyle_dataset.csv";
@@ -43,6 +44,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     for record in short_sleeper {
         println!("{:?}", record)
+    }
+
+    // Occupations
+    let occupation = find_unique_value(&records, |record| record.occupation.clone());
+
+    for occu in occupation {
+        println!("{occu}");
+    }
+
+    // Gender
+    let genders = find_unique_value(&records, |record| record.gender.clone());
+
+    for gender in genders {
+        println!("{gender}");
     }
 
     Ok(())
