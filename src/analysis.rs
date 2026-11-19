@@ -61,9 +61,39 @@ where
     records.iter().map(extractor).collect()
 }
 
-// pub fn average_sleep_quality_by_occupation(records: &[SleepRecord]) -> HashMap<String, f64> {
-//     let occupations =
-//     let map: HashMap<String, (u64, usize)> = HashMap::new();
-//
-//
-// }
+// Average Sleep quality by Occupation
+
+pub fn average_sleep_quality_by_occupation(records: &[SleepRecord]) -> HashMap<String, f64> {
+    // let occupations = find_unique_value(records, |record| record.occupation.clone());
+    let mut occu_map: HashMap<String, (u64, usize)> = HashMap::new();
+
+    for record in records {
+        let stats = occu_map.entry(record.occupation.clone()).or_insert((0, 0));
+
+        stats.0 += record.quality_of_sleep as u64;
+        stats.1 += 1;
+    }
+
+    occu_map
+        .into_iter()
+        .map(|(occu, (total, count))| (occu, total as f64 / count as f64))
+        .collect()
+}
+
+// Average Stress by occupation
+pub fn average_stress_by_occupation(records: &[SleepRecord]) -> HashMap<String, f64> {
+    // let occupations = find_unique_value(records, |record| record.occupation.clone());
+    let mut occu_map: HashMap<String, (u64, usize)> = HashMap::new();
+
+    for record in records {
+        let stats = occu_map.entry(record.occupation.clone()).or_insert((0, 0));
+
+        stats.0 += record.stress_level as u64;
+        stats.1 += 1;
+    }
+
+    occu_map
+        .into_iter()
+        .map(|(occu, (total, count))| (occu, total as f64 / count as f64))
+        .collect()
+}

@@ -6,6 +6,8 @@ use analysis::average_sleep_duration;
 use analysis::avg_age;
 use reader::read_csv;
 
+use crate::analysis::average_sleep_quality_by_occupation;
+use crate::analysis::average_stress_by_occupation;
 use crate::analysis::count_by_gender;
 use crate::analysis::find_short_sleepers;
 use crate::analysis::find_unique_value;
@@ -58,6 +60,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     for gender in genders {
         println!("{gender}");
+    }
+
+    // average sleep quality by ocuupations
+    //
+    println!("\n========== SLEEP QUALITY BY OCCUPATION ==========");
+    let avg_slp_quality = average_sleep_quality_by_occupation(&records);
+
+    for item in avg_slp_quality {
+        println!("{:?} -> {:?}", item.0, item.1);
+    }
+    // average stress by ocuupations
+    //
+    println!("\n========== STRESS BY OCCUPATION ==========");
+    let avg_stress = average_stress_by_occupation(&records);
+
+    for item in avg_stress {
+        println!("{:?} -> {:?}", item.0, item.1);
     }
 
     Ok(())
