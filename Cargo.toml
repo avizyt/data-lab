@@ -1,0 +1,12 @@
+[package]
+name = "data-lab"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+csv = "1.4.0"
+serde = { version = "1.0.229", features = ["derive"] }
+
+
+[lints.rust]
+dead_code = "allow"
