@@ -97,3 +97,20 @@ pub fn average_stress_by_occupation(records: &[SleepRecord]) -> HashMap<String, 
         .map(|(occu, (total, count))| (occu, total as f64 / count as f64))
         .collect()
 }
+
+// sleep quality by gender
+pub fn sleep_quality_by_gender(records: &[SleepRecord]) -> HashMap<String, f64> {
+    let mut gen_map: HashMap<String, (u64, usize)> = HashMap::new();
+
+    for record in records {
+        let stats = gen_map.entry(record.gender.clone()).or_insert((0, 0));
+
+        stats.0 += record.quality_of_sleep as u64;
+        stats.1 += 1;
+    }
+
+    gen_map
+        .into_iter()
+        .map(|(gend, (total, count))| (gend, total as f64 / count as f64))
+        .collect()
+}

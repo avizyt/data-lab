@@ -11,6 +11,7 @@ use crate::analysis::average_stress_by_occupation;
 use crate::analysis::count_by_gender;
 use crate::analysis::find_short_sleepers;
 use crate::analysis::find_unique_value;
+use crate::analysis::sleep_quality_by_gender;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = "data/Sleep_health_and_lifestyle_dataset.csv";
@@ -76,6 +77,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let avg_stress = average_stress_by_occupation(&records);
 
     for item in avg_stress {
+        println!("{:?} -> {:?}", item.0, item.1);
+    }
+    // Sleep quality by gender
+    //
+    println!("\n========== Sleep Quality By Gender ==========");
+    let sleep_qualities = sleep_quality_by_gender(&records);
+
+    for item in sleep_qualities {
         println!("{:?} -> {:?}", item.0, item.1);
     }
 
