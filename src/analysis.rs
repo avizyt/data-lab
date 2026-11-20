@@ -114,3 +114,20 @@ pub fn sleep_quality_by_gender(records: &[SleepRecord]) -> HashMap<String, f64> 
         .map(|(gend, (total, count))| (gend, total as f64 / count as f64))
         .collect()
 }
+
+// sleep quality by BMI category
+pub fn average_sleep_quality_by_bmi(records: &[SleepRecord]) -> HashMap<String, f64> {
+    let mut bmi_map: HashMap<String, (u64, usize)> = HashMap::new();
+
+    for record in records {
+        let stats = bmi_map.entry(record.bmi_category.clone()).or_insert((0, 0));
+
+        stats.0 += record.quality_of_sleep as u64;
+        stats.1 += 1;
+    }
+
+    bmi_map
+        .into_iter()
+        .map(|(bmi, (total, count))| (bmi, total as f64 / count as f64))
+        .collect()
+}

@@ -6,6 +6,7 @@ use analysis::average_sleep_duration;
 use analysis::avg_age;
 use reader::read_csv;
 
+use crate::analysis::average_sleep_quality_by_bmi;
 use crate::analysis::average_sleep_quality_by_occupation;
 use crate::analysis::average_stress_by_occupation;
 use crate::analysis::count_by_gender;
@@ -85,6 +86,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let sleep_qualities = sleep_quality_by_gender(&records);
 
     for item in sleep_qualities {
+        println!("{:?} -> {:?}", item.0, item.1);
+    }
+
+    // Sleep quality by BMI
+    println!("\n========== SLEEP By BMI ==========");
+    let sleep_q_bmi = average_sleep_quality_by_bmi(&records);
+
+    for item in sleep_q_bmi {
         println!("{:?} -> {:?}", item.0, item.1);
     }
 
