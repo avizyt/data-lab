@@ -131,3 +131,32 @@ pub fn average_sleep_quality_by_bmi(records: &[SleepRecord]) -> HashMap<String, 
         .map(|(bmi, (total, count))| (bmi, total as f64 / count as f64))
         .collect()
 }
+
+// filter by age
+//
+pub fn filter_by_age(records: &[SleepRecord], min_age: u8) -> Vec<&SleepRecord> {
+    //     let mut filtered_age: Vec<&SleepRecord> = Vec::new();
+    //
+    //     for record in records {
+    //         if record.age >= min_age {
+    //             filtered_age.push(record);
+    //         }
+    //     }
+
+    // filtered_age
+    records
+        .iter()
+        .filter(|record| record.age >= min_age)
+        .collect()
+}
+
+pub fn filter_by_age_and_sleep(
+    records: &[SleepRecord],
+    min_age: u8,
+    max_sleep: f64,
+) -> Vec<&SleepRecord> {
+    records
+        .iter()
+        .filter(|record| record.age >= min_age && record.sleep_duration >= max_sleep)
+        .collect()
+}
